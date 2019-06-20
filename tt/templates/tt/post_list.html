@@ -1,0 +1,24 @@
+{% extends 'tt/base.html' %}
+
+{% block content %}
+<p>大凱ストローク総数：{{ params.taiga_01 }}回</p>
+<p>大凱サーブ総数：{{ params.taiga_02 }}回</p>
+<p>有希腹筋総数：{{ params.yuki_01 }}回</p>
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.created_date }}
+            </div>
+            <h1><a href="">{{ post.title }}</a></h1>
+            <p>{{ post.result }}</p>
+            <p>{% if post.challenger == '1' %}
+                    大凱
+                {% elif post.challenger == '2' %}
+                    有希
+                {% endif %}
+            </p>
+
+
+        </div>
+    {% endfor %}
+{% endblock %}
