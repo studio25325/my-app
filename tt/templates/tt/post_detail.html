@@ -1,16 +1,26 @@
-{% extends 'blog/base.html' %}
+{% extends 'tt/base.html' %}
 
 {% block content %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="main_box">
+        Detail
+    </div>
     <div class="post">
+        <div class="mid_box">
         {% if post.published_date %}
             <div class="date">
                 {{ post.published_date }}
             </div>
         {% endif %}
+
+        {{ post.title }}<br />
+        {{ post.result|linebreaksbr }}<br />
+        {{ post.challenger|linebreaksbr }}<br />
+        {{ post.created_date }}<br /><br />
         {% if user.is_authenticated %}
-        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn-default" href="{% url 'post10_edit' pk=post.pk %}">編集</a><br /><br />
         {% endif %}
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaksbr }}</p>
+        </div>
     </div>
+</div>
 {% endblock %}
