@@ -95,19 +95,11 @@ div:nth-child(2n) > .mid_box {
   padding: 20px 20px 20px 20px;
 }
 
-
-
-.btn-default {
-    border:solid 1px #ccc !important;
-    padding:10px 20px !important;
-    margin:20px 0 20px !important;
-    font-family: 'Noto Serif JP', serif !important;
-    font-size:16px !important;
-    text-transform:uppercase !important;
-    font-weight:bold !important;
-    color:#353535 !important;
-    cursor:pointer !important;
-    text-align: center !important;
+.b_style {
+    background-color: #91bea3;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
 .post-form input {
@@ -135,7 +127,7 @@ div:nth-child(2n) > .mid_box {
     -moz-border-radius: 6px;
     border-radius: 6px;
     width: 100%;
-    background-color: #FFFFFF;    
+    background-color: #FFFFFF;
 }
 
 #id_challenger {
