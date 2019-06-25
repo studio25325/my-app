@@ -83,13 +83,13 @@ h2 {
 }
 
 div:nth-child(2n+1) > .mid_box {
-  background-color: #78a98c;
+  background-color: #5d93c1;
   width: auto;
   color: #353535;
   padding: 20px 20px 20px 20px;
 }
 div:nth-child(2n) > .mid_box {
-  background-color: #91bea3;
+  background-color: #6ea5d3;
   width: auto;
   color: #353535;
   padding: 20px 20px 20px 20px;

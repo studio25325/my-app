@@ -19,9 +19,15 @@ def index(request):
         'taiga_01': 'a',
         'taiga_02': 'b',
         'taiga_03': 'b',
+        'taiga_01_days': 'a',
+        'taiga_02_days': 'b',
+        'taiga_03_days': 'b',
         'yuki_01': 'a',
         'yuki_02': 'b',
         'yuki_03': 'b',
+        'yuki_01_days': 'a',
+        'yuki_02_days': 'b',
+        'yuki_03_days': 'b',
     }
     #form = PostForm()
     context = {'posts': posts, 'params': params, }
@@ -40,7 +46,10 @@ def index(request):
 
     params['taiga_01'] = df_st['result'].sum(axis=0)
     params['taiga_02'] = df_se['result'].sum(axis=0)
+    params['taiga_01_days'] = len(df_st)
+    params['taiga_02_days'] = len(df_se)
     params['yuki_01'] = df_y['result'].sum(axis=0)
+    params['yuki_01_days'] = len(df_y)
     #df_net1 = df_p[df_p.winner == '0']
 
     return render(request, 'tt/post_list.html', context)
