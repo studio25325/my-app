@@ -81,7 +81,7 @@ class MyCalendar(mixins.MonthCalendarMixin, mixins.WeekWithScheduleMixin, generi
         if month and year and day:
             date = datetime.date(year=int(year), month=int(month), day=int(day))
         else:
-            date = datetime.date.today()
+            date1 = datetime.date.today()
         schedule = form.save(commit=False)
         schedule.date = date
         schedule.save()
