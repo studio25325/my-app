@@ -1,11 +1,10 @@
 import datetime
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views import generic
+from .forms import BS4ScheduleForm, SimpleScheduleForm
 from .models import Schedule
-from django.utils import timezone
 from . import mixins
-from .forms import BS4ScheduleForm
-from .models import Schedule
+
 
 class MonthCalendar(mixins.MonthCalendarMixin, generic.TemplateView):
     """月間カレンダーを表示するビュー"""
@@ -39,24 +38,7 @@ class WeekWithScheduleCalendar(mixins.WeekWithScheduleMixin, generic.TemplateVie
         context = super().get_context_data(**kwargs)
         calendar_context = self.get_week_calendar()
         context.update(calendar_context)
-        context['week_row'] = zip(
-            calendar_context['week_names'],
-            calendar_context['week_days'],
-            calendar_context['week_day_schedules'].values()
-        )
         return context
-
-
-class MonthCalendar(mixins.MonthCalendarMixin, generic.TemplateView):
-    """月間カレンダーを表示するビュー"""
-    template_name = 'scheduler/month.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        calendar_context = self.get_month_calendar()
-        context.update(calendar_context)
-        return context
-
 
 
 class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateView):
@@ -70,7 +52,6 @@ class MonthWithScheduleCalendar(mixins.MonthWithScheduleMixin, generic.TemplateV
         calendar_context = self.get_month_calendar()
         context.update(calendar_context)
         return context
-
 
 
 class MyCalendar(mixins.MonthCalendarMixin, mixins.WeekWithScheduleMixin, generic.CreateView):
@@ -95,8 +76,29 @@ class MyCalendar(mixins.MonthCalendarMixin, mixins.WeekWithScheduleMixin, generi
         if month and year and day:
             date = datetime.date(year=int(year), month=int(month), day=int(day))
         else:
-            date1 = datetime.date.today()
+            date = datetime.date.today()
         schedule = form.save(commit=False)
         schedule.date = date
         schedule.save()
         return redirect('scheduler:mycalendar', year=date.year, month=date.month, day=date.day)
+
+
+class MonthWithFormsCalendar(mixins.MonthWithFormsMixin, generic.View):
+    """フォーム付きの月間カレンダーを表示するビュー"""
+    template_name = 'scheduler/month_with_forms.html'
+    model = Schedule
+    date_field = 'date'
+    form_class = SimpleScheduleForm
+
+    def get(self, request, **kwargs):
+        context = self.get_month_calendar()
+        return render(request, self.template_name, context)
+
+    def post(self, request, **kwargs):
+        context = self.get_month_calendar()
+        formset = context['month_formset']
+        if formset.is_valid():
+            formset.save()
+            return redirect('scheduler:month_with_forms')
+
+        return render(request, self.template_name, context)

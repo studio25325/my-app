@@ -1,53 +1,45 @@
 {% extends 'scheduler/base.html' %}
 {% block content %}
 
-<div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="main_box2">
-        <a href="/scheduler/mycalendar" >予定の追加</a>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="mid_box">
-
-    {{ week_first | date:"Y年m月d日" }}〜{{ week_last | date:"Y年m月d日" }}<br />
-    <a href="{% url 'scheduler:week_with_schedule' week_previous.year week_previous.month  week_previous.day %}">前週</a>：
-    <a href="{% url 'scheduler:week_with_schedule' week_next.year week_next.month  week_next.day %}">次週</a><br /><br />
+    <a href="{% url 'scheduler:week_with_schedule' week_previous.year week_previous.month  week_previous.day %}">前週</a>
+    {{ week_first | date:"Y年m月d日" }}〜{{ week_last | date:"Y年m月d日" }}
+    <a href="{% url 'scheduler:week_with_schedule' week_next.year week_next.month  week_next.day %}">次週</a>
 
     <table class="table table-bordered">
+        <thead>
+        <tr>
+            {% for w in week_names %}
+                <th>{{ w }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
         <tbody>
-        {% for week_name, day, schedules in week_row %}
-            <tr>
-                <td>
-                    {% if week_first.month != day.month %}
-                        {{ day | date:"m/d" }}
-                    {% else %}
-                        {{ day.day }}
-                    {% endif %}
-                    ({{ week_name }})
-                </td>
-
+        <tr>
+            {% for day in week_days %}
+                {% if now == day %}
+                    <td class="table-success">
+                {% else %}
+                    <td>
+                {% endif %}
+            {% if week_first.month != day.month %}
+                {{ day | date:"m/d" }}
+            {% else %}
+                {{ day.day }}
+            {% endif %}
+            </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for schedules in week_day_schedules.values %}
                 <td>
                     {% for s in schedules %}
-                        {{ s.date }}<br>
+                        {{ s.start_time }} - {{ s.end_time }}<br>
                         {{ s.summary }}<br>
                         {{ s.description | linebreaks }}
                     {% endfor %}
                 </td>
-            </tr>
-        {% endfor %}
+            {% endfor %}
+        </tr>
         </tbody>
     </table>
-
-    </div>
-    </div>
-</div>
-
-<div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="main_box2">
-        <a href="/scheduler/mycalendar" >予定の追加</a>
-    </div>
-</div>
-
 {% endblock %}

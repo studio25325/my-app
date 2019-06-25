@@ -1,4 +1,3 @@
-
 <a href="{% url 'scheduler:mycalendar' month_previous.year month_previous.month month_previous.day %}">前月</a>
 {{ month_current | date:"Y年m月" }}
 <a href="{% url 'scheduler:mycalendar' month_next.year month_next.month month_next.day %}">次月</a>

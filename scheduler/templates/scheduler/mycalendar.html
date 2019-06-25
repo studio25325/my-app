@@ -1,15 +1,7 @@
 {% extends 'scheduler/base.html' %}
 {% block content %}
-
-<div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="main_box2">
-        <a href="/scheduler/week_with_schedule" >週間スケジュール</a>
-    </div>
-</div>
-
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="main_box">
+        <div class="col-md-3">
             {% include 'scheduler/includes/month.html' %}
             <hr>
             <form action="" method="POST">
@@ -28,20 +20,10 @@
                 <button type="submit" class="btn btn-primary btn-block">送信</button>
             </form>
         </div>
-        </div>
-        <!--
         <div class="col-md-9">
             {% include 'scheduler/includes/week.html' %}
         </div>
-        -->
     </div>
-
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="main_box2">
-            <a href="/scheduler/week_with_schedule" >週間スケジュール</a>
-        </div>
-    </div>
-
 {% endblock %}
 
 

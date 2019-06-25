@@ -6,13 +6,6 @@
     <a href="{% url 'scheduler:month' month_next.year month_next.month %}">次月</a>
 
     <table class="table">
-        <thead>
-        <tr>
-            {% for w in week_names %}
-                <th>{{ w }}</th>
-            {% endfor %}
-        </tr>
-        </thead>
         <tbody>
         {% for week in month_days %}
             <tr>
