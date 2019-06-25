@@ -6,13 +6,18 @@ body {
 
 .page-header {
     background-color: #fe646d;
-    padding: 30px 20px 20px 40px;
+    padding: 30px 20px 20px 20px;
+    text-align: center;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
     color: #ffffff;
     font-size: 16pt;
     text-decoration: none;
+}
+
+.page_title {
+    margin: 0 auto;
 }
 
 
