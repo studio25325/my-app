@@ -63,7 +63,7 @@ h2 {
 }
 
 .main_box {
-    background-color: #fed100;
+    background-color: #C3C7CA;
     width: 100%;
     color: #353535;
     line-height: 200%;
@@ -87,13 +87,13 @@ h2 {
 }
 
 div:nth-child(2n+1) > .mid_box {
-  background-color: #5d93c1;
+  background-color: #C3C7CA;
   width: auto;
   color: #353535;
   padding: 20px 20px 20px 20px;
 }
 div:nth-child(2n) > .mid_box {
-  background-color: #6ea5d3;
+  background-color: #C3C7CA;
   width: auto;
   color: #353535;
   padding: 20px 20px 20px 20px;
